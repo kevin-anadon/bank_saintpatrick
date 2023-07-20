@@ -1,10 +1,10 @@
-# Bank Saint Patrick - Home Banking (Ficticional Project)
+# Saint Patrick Bank - Home Banking (Ficticional Project)
 
-![Bank Saint Patrick Logo](https://github.com/kevin-anadon/bank_saintpatrick/blob/main/client/public/resources/images/logo.png)
+![Saint Patrick Bank Logo](https://github.com/kevin-anadon/bank_saintpatrick/blob/main/client/public/resources/images/logo.png)
 
 **Note: This is a fictional project created for educational and demonstration purposes. The data and information presented here are not real.**
 
-Welcome to Bank Saint Patrick Home Banking! This project aims to provide a secure and user-friendly platform for performing transactions with pre-defined user cards. Below, you will find all the necessary information to set up and use the application.
+Welcome to Saint Patrick Bank Home Banking! This project aims to provide a secure and user-friendly platform for performing transactions with pre-defined user cards. Below, you will find all the necessary information to set up and use the application.
 
 ## Project Idea
 
@@ -12,7 +12,7 @@ The idea behind this project is to create a Home Banking platform that allows us
 
 ## Objective
 
-The main objective of Bank Saint Patrick is to enable users to transfer money between accounts safely and efficiently. By utilizing pre-defined user cards, we can ensure secure transactions and prevent any financial losses.
+The main objective of Saint Patrick Bank is to enable users to transfer money between accounts safely and efficiently. By utilizing pre-defined user cards, we can ensure secure transactions and prevent any financial losses.
 
 ## Front-end Stack
 
@@ -108,4 +108,4 @@ To deploy the front-end on Netlify and the back-end on Railway, follow the respe
 
 Feel free to contribute to the project or report any issues [here](https://github.com/kevin-anadon/bank_saintpatrick/issues).
 
-Enjoy using Bank Saint Patrick Home Banking! 🏦💳
+Enjoy using Saint Patrick Bank Home Banking! 🏦💳
