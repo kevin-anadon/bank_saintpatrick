@@ -1,6 +1,6 @@
 # Bank Saint Patrick - Home Banking (Ficticional Project)
 
-![Bank Saint Patrick Logo](https://github.com/kevin-anadon/bank_saintpatrick/Frontend/Resources/images/logo.png)
+![Bank Saint Patrick Logo](https://github.com/kevin-anadon/bank_saintpatrick/client/public/resources/images/logo.png)
 
 **Note: This is a fictional project created for educational and demonstration purposes. The data and information presented here are not real.**
 
@@ -72,7 +72,7 @@ cd bank-saint-patrick
 3. Install dependencies for the front-end.
 
 ```
-cd frontend
+cd client
 npm install
 cd ..
 ```
@@ -80,7 +80,7 @@ cd ..
 4. Install dependencies for the back-end.
 
 ```
-cd backend
+cd server
 npm install
 ```
 
@@ -89,14 +89,14 @@ npm install
 6. Run the front-end development server.
 
 ```
-cd frontend
+cd client
 npm run dev
 ```
 
 7. Run the back-end server.
 
 ```
-cd backend
+cd server
 npm start
 ```
 
