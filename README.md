@@ -1,10 +1,10 @@
-# Banco Saint Patrick - Home Banking (Ficticional Project)
+# Bank Saint Patrick - Home Banking (Ficticional Project)
 
-![Banco Saint Patrick Logo](https://github.com/kevin-anadon/banco_saintpatrick/Frontend/Resources/images/logo.png)
+![Bank Saint Patrick Logo](https://github.com/kevin-anadon/bank_saintpatrick/Frontend/Resources/images/logo.png)
 
 **Note: This is a fictional project created for educational and demonstration purposes. The data and information presented here are not real.**
 
-Welcome to Banco Saint Patrick Home Banking! This project aims to provide a secure and user-friendly platform for performing transactions with pre-defined user cards. Below, you will find all the necessary information to set up and use the application.
+Welcome to Bank Saint Patrick Home Banking! This project aims to provide a secure and user-friendly platform for performing transactions with pre-defined user cards. Below, you will find all the necessary information to set up and use the application.
 
 ## Project Idea
 
@@ -12,7 +12,7 @@ The idea behind this project is to create a Home Banking platform that allows us
 
 ## Objective
 
-The main objective of Banco Saint Patrick is to enable users to transfer money between accounts safely and efficiently. By utilizing pre-defined user cards, we can ensure secure transactions and prevent any financial losses.
+The main objective of Bank Saint Patrick is to enable users to transfer money between accounts safely and efficiently. By utilizing pre-defined user cards, we can ensure secure transactions and prevent any financial losses.
 
 ## Front-end Stack
 
@@ -60,13 +60,13 @@ The front-end of the application will be hosted on Netlify, while the back-end a
 1. Clone the repository.
 
 ```
-git clone https://github.com/your-username/banco-saint-patrick.git
+git clone https://github.com/your-username/bank-saint-patrick.git
 ```
 
 2. Navigate to the project folder.
 
 ```
-cd banco-saint-patrick
+cd bank-saint-patrick
 ```
 
 3. Install dependencies for the front-end.
@@ -106,6 +106,6 @@ You should now be able to access the application locally at `http://localhost:30
 
 To deploy the front-end on Netlify and the back-end on Railway, follow the respective deployment instructions for each platform.
 
-Feel free to contribute to the project or report any issues [here](https://github.com/kevin-anadon/banco_saintpatrick/issues).
+Feel free to contribute to the project or report any issues [here](https://github.com/kevin-anadon/bank_saintpatrick/issues).
 
-Enjoy using Banco Saint Patrick Home Banking! 🏦💳
+Enjoy using Bank Saint Patrick Home Banking! 🏦💳
