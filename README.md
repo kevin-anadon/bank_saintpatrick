@@ -1,6 +1,6 @@
 # Saint Patrick Bank - Home Banking (Ficticional Project)
 
-![Saint Patrick Bank Logo](https://github.com/kevin-anadon/bank_saintpatrick/blob/main/client/public/resources/images/logo.png)
+![Saint Patrick Bank Logo](https://github.com/kevin-anadon/bank_saintpatrick/blob/main/client/src/assets/resources/images/logo.png)
 
 **Note: This is a fictional project created for educational and demonstration purposes. The data and information presented here are not real.**
 
