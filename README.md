@@ -22,7 +22,7 @@ The main objective of Saint Patrick Bank is to enable users to transfer money be
 
 ## Back-end Stack
 
-- NodeJS (Server-side JavaScript runtime)
+- NodeJS (Server-side JavaScript runtime) with TypeScript
 - ExpressJS (Web application framework for NodeJS)
 - MySQL (Relational database management system)
 
