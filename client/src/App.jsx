@@ -1,16 +1,13 @@
-// import bankLogo from './assets/resources/images/logo.png'
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { Navigate ,BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import './App.css'
-import Login from './pages/Login'
-import Home from './pages/Home'
-import Transactions from './pages/Transactions'
+import { Login, Home, Transactions} from './pages'
 
 function App() {
-
   return (
     <BrowserRouter>
       <Routes>
+        <Route path='/' element={<Navigate to='/login' replace/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/home' element={<Home/>}></Route>
         <Route path='/transactions' element={<Transactions/>}></Route>

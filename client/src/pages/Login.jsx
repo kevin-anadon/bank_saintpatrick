@@ -8,11 +8,11 @@ export default function Login() {
 
   // Provicional, futuro hacerlo con localStorage o algo que guarde
   let [authStatus, setAuthStatus] = useState(false)
-  let [user, setUser] = useState(0)
+  let [cardNumber, setCardNumber] = useState(0)
   let [password, setPassword] = useState(0)
 
-  const handleUserChange  = (event) => { 
-    setUser(event.target.value)
+  const handleCardNumberChange  = (event) => { 
+    setCardNumber(event.target.value)
   }
 
   const handlePasswordChange = (event) => { 
@@ -28,24 +28,25 @@ export default function Login() {
     // TODO: HACER COMPROBACIONES (User y Pass)
     // if (usuario y pass bien) => window.location = '/home'
     try {
-      const response = await fetch('localhost:3000/api/login', {
+      const response = await fetch('http://localhost:3001/api/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          user,
+          cardNumber,
           password
         })
       })
-      const data = await response.json()
-      if (data.status === 'ok') {
+      
+      if (response.status === 200) {
+        const data = await response.json()
         console.log(data);
+        if (data.iguales) handleAuthStatusChange()
+        else alert('Card number or Password incorrect')
       }
-      handleAuthStatusChange()
     } catch (error) {
-      console.log(error);
-      return
+      throw Error(error)
     }
   }
 
@@ -63,7 +64,7 @@ export default function Login() {
                 type="number"
                 className="form-control mt-1"
                 placeholder="XXXX-XXXX-XXXX-XXXX"
-                onChange={handleUserChange}            
+                onChange={handleCardNumberChange}            
               />
             </div>
             <div className="form-group mt-3">
