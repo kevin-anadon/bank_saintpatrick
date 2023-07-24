@@ -3,7 +3,7 @@ import express from "express"
 import cors from "cors"
 
 import routes from "./routes/index.js"
-import { PORT } from "./config/consts.js"
+import { PORT, dbConnect } from "./config/index.js"
 
 // Intialize
 const app = express()
@@ -16,10 +16,12 @@ app.use(express.json())
 app.use("/api", routes)
 
 // Listen
-const server = app.listen(PORT, () => {
-  console.log(`Server started on port: ${PORT}!`);
-})
+const server = app.listen(PORT)
+
+// Database connection
+dbConnect()
 
 export {
+  app,
   server
 }

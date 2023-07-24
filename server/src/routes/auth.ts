@@ -11,7 +11,7 @@ import { login } from '../controllers/login.js'
 
 router.post('/', [
   check("cardNumber", "Card number is required").not().isEmpty(),
-  check("password", "Password is required").not().isEmpty(),
+  check("pin", "Pin is required").not().isEmpty(),
   validateFields
 ],login)
 
