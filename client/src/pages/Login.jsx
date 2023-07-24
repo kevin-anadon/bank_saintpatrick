@@ -9,14 +9,14 @@ export default function Login() {
   // Provicional, futuro hacerlo con localStorage o algo que guarde
   let [authStatus, setAuthStatus] = useState(false)
   let [cardNumber, setCardNumber] = useState(0)
-  let [password, setPassword] = useState(0)
+  let [pin, setPin] = useState(0)
 
   const handleCardNumberChange  = (event) => { 
     setCardNumber(event.target.value)
   }
 
-  const handlePasswordChange = (event) => { 
-    setPassword(event.target.value)
+  const handlePinChange = (event) => { 
+    setPin(event.target.value)
   }
 
   const handleAuthStatusChange = () => {
@@ -25,8 +25,7 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    // TODO: HACER COMPROBACIONES (User y Pass)
-    // if (usuario y pass bien) => window.location = '/home'
+    // TODO: Validacion del lado cliente que no falte
     try {
       const response = await fetch('http://localhost:3001/api/auth', {
         method: 'POST',
@@ -35,15 +34,23 @@ export default function Login() {
         },
         body: JSON.stringify({
           cardNumber,
-          password
+          pin
         })
       })
+
+      const data = await response.json()
       
       if (response.status === 200) {
-        const data = await response.json()
-        console.log(data);
-        if (data.iguales) handleAuthStatusChange()
-        else alert('Card number or Password incorrect')
+        const { id, firstName, lastName } = data.user
+        const user = {id, firstName, lastName}
+        const { cardNumber, balance } = data.card
+        const card = {cardNumber, balance}
+        sessionStorage.setItem('user', JSON.stringify(user))
+        sessionStorage.setItem('card', JSON.stringify(card))
+        handleAuthStatusChange()
+      } else {
+        // TODO: alerta bonita
+        alert(data.msg)
       }
     } catch (error) {
       throw Error(error)
@@ -73,7 +80,7 @@ export default function Login() {
                 type="password"
                 className="form-control mt-1"
                 placeholder="Enter pin (4 digits)"
-                onChange={handlePasswordChange}
+                onChange={handlePinChange}
               />
             </div>
             <div className="d-grid gap-2 mt-3">
