@@ -1,19 +1,51 @@
 import bcrypt from 'bcryptjs';
 import { Request , Response} from 'express';
 
-type UserLogin = {
-    cardNumber: number,
-    password: number
-}
+import { User, Card } from "../models/index.js"
 
-export const login = (req: Request, res: Response) => { 
-  const { cardNumber, password }: UserLogin = req.body;
-  let iguales = false
+export const login = async (req: Request, res: Response) => { 
+  const { cardNumber, pin }: { cardNumber: number, pin: string } = req.body;
+  try {
+    const card = await Card.findOne({ 
+      where: {
+        cardNumber: cardNumber,
+      }
+    })
+    if (!card) {
+      return res
+        .status(400)
+        .json({ msg: "Card with this number does not exists" 
+      })
+    }
+    const user = await User.findOne({
+      where: {
+        id: card.user_id
+      }
+    })
 
-  
-  // Me fijo que cardNumber y pass sean iguales a los que están en la BD
-  
-  res.status(200).json({
-      iguales
-  });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ msg: "User not found with this card" 
+      })
+    }
+
+    // TODO: use bcrypt y validar pass
+    const validPassword = true
+
+    if (!validPassword) {
+      return res
+        .status(400)
+        .json({ msg: "Invalid password" 
+      })
+    }
+
+    res.status(200).json({
+      card,
+      user,
+      validPassword
+    })
+  } catch (error) {
+    throw Error(error)
+  }
 }
