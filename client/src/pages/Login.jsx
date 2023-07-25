@@ -1,15 +1,22 @@
-// import bankLogo from '../assets/resources/images/logo.png'
+/* eslint-disable react-hooks/exhaustive-deps */
 import "bootstrap/dist/css/bootstrap.min.css"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import Navbar from "../components/Navbar"
 
 export default function Login() {  
-
   // Provicional, futuro hacerlo con localStorage o algo que guarde
   let [authStatus, setAuthStatus] = useState(false)
   let [cardNumber, setCardNumber] = useState(0)
   let [pin, setPin] = useState(0)
+
+  
+  useEffect(() => {
+    const user = JSON.parse(sessionStorage.getItem('user'))
+    if (user && user.firstName) {
+      handleAuthStatusChange()
+    }
+  }, [])
 
   const handleCardNumberChange  = (event) => { 
     setCardNumber(event.target.value)
