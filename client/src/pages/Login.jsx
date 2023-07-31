@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import "bootstrap/dist/css/bootstrap.min.css"
 import { useState, useEffect } from "react"
+import { useForm } from "react-hook-form"
+import Cleave from "cleave.js/react"
 
 import Navbar from "../components/Navbar"
 
-export default function Login() {  
-  // Provicional, futuro hacerlo con localStorage o algo que guarde
-  let [authStatus, setAuthStatus] = useState(false)
-  let [cardNumber, setCardNumber] = useState(0)
-  let [pin, setPin] = useState(0)
-
+export default function Login() {
+  const [authStatus, setAuthStatus] = useState(false)
+  const [cardNumber, setCardNumber] = useState(0)
+  const [pin, setPin] = useState(0)
+  const { register, handleSubmit, formState: { errors } } = useForm()
   
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem('user'))
@@ -30,9 +31,7 @@ export default function Login() {
     setAuthStatus(!authStatus)
   }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    // TODO: Validacion del lado cliente que no falte
+  const onSubmit = async () => {
     try {
       const response = await fetch('http://localhost:3001/api/auth', {
         method: 'POST',
@@ -74,24 +73,51 @@ export default function Login() {
             <h3 className="Auth-form-title">Sign In</h3>
             <div className="form-group mt-3">
               <label>Card Number</label>
+              {/* <Cleave 
+                className={`form-control mt-1 ${errors.cardNumber ? 'is-invalid' : ''}`}
+                placeholder="XXXX-XXXX-XXXX-XXXX"
+                onChange={handleCardNumberChange}
+                {...register("cardNumber", {
+                  required: true,
+                  
+                })}
+                options={{
+                  blocks: [4,4,4,4], 
+                  delimiter: '-', 
+                  numericOnly: true
+                }}></Cleave> */}
               <input
+                {...register("cardNumber", {
+                  required: true,
+                  minLength: 16,
+                  maxLength: 16
+                })}
                 type="number"
-                className="form-control mt-1"
+                className={`form-control mt-1 ${errors.cardNumber ? 'is-invalid' : ''}`}
                 placeholder="XXXX-XXXX-XXXX-XXXX"
                 onChange={handleCardNumberChange}            
               />
+              {errors.cardNumber && <label className="invalid-feedback">This field is required</label>}
+              {/* {errors.cardNumber && <label className="invalid-feedback"></label>} */}
             </div>
             <div className="form-group mt-3">
               <label>Pin</label>
               <input
+                {...register("pin", {
+                  required: true, 
+                  minLength: 4,
+                  maxLength: 4
+                })}
                 type="password"
-                className="form-control mt-1"
+                className={`form-control mt-1 ${errors.pin ? 'is-invalid' : ''}`}
                 placeholder="Enter pin (4 digits)"
                 onChange={handlePinChange}
               />
+              {/* {(pin <= 999 || pin > 9999) && <label className="">The pin must be of 4-digits</label>} */}
+              {errors.pin && <label className="invalid-feedback">This field is required</label>}
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button onClick={handleSubmit} type="submit" className="btn btn-primary">
+              <button onClick={handleSubmit(onSubmit)} type="submit" className="btn btn-primary">
                 Submit
               </button>
             </div>
