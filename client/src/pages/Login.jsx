@@ -1,15 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import "bootstrap/dist/css/bootstrap.min.css"
 import { useState, useEffect } from "react"
+import { useForm } from "react-hook-form"
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
 
 import Navbar from "../components/Navbar"
 
-export default function Login() {  
-  // Provicional, futuro hacerlo con localStorage o algo que guarde
-  let [authStatus, setAuthStatus] = useState(false)
-  let [cardNumber, setCardNumber] = useState(0)
-  let [pin, setPin] = useState(0)
-
+export default function Login() {
+  const [authStatus, setAuthStatus] = useState(false)
+  const [cardNumber, setCardNumber] = useState('')
+  const [pin, setPin] = useState(0)
+  const { register, handleSubmit, formState: { errors } } = useForm()
+  const MySwal = withReactContent(Swal)
   
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem('user'))
@@ -18,8 +21,27 @@ export default function Login() {
     }
   }, [])
 
+  const handleCardDisplay = () => {
+        const rawText = [...cardNumber.split('-').join('')] // Remove old space
+        
+        if (rawText.length <= 16) {
+          const creditCard = [] // Create card as array
+          rawText.forEach((text, index) => {
+              if (index % 4 === 0 && index !== 0) creditCard.push('-') // Add space
+              creditCard.push(text)
+          })
+          return creditCard.join('')
+        }
+  }
+
+  const handleCardDelete = (event) => {
+    const key = event.key || event.charCode
+    if (key === 'Backspace' && event.target.value.trim(1).length === 1) setCardNumber('')
+  }
+
   const handleCardNumberChange  = (event) => { 
-    setCardNumber(event.target.value)
+    const inputCardNumber = event.target.value
+    if (inputCardNumber.trim().length >= 1) setCardNumber(inputCardNumber.split('-').join(''))
   }
 
   const handlePinChange = (event) => { 
@@ -30,9 +52,7 @@ export default function Login() {
     setAuthStatus(!authStatus)
   }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    // TODO: Validacion del lado cliente que no falte
+  const onSubmit = async () => {
     try {
       const response = await fetch('http://localhost:3001/api/auth', {
         method: 'POST',
@@ -57,7 +77,12 @@ export default function Login() {
         handleAuthStatusChange()
       } else {
         // TODO: alerta bonita
-        alert(data.msg)
+        MySwal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${data.msg}!`,
+          footer: '<a href="https://github.com/kevin-anadon/bank_saintpatrick">Why do I have this issue?</a>'
+        })
       }
     } catch (error) {
       throw Error(error)
@@ -75,23 +100,40 @@ export default function Login() {
             <div className="form-group mt-3">
               <label>Card Number</label>
               <input
-                type="number"
-                className="form-control mt-1"
+                {...register("cardNumber", {
+                  required: true,
+                  maxLength: 19,
+                  minLength: 19
+                })}
+                maxLength="19"
+                type="text"
+                className={`form-control mt-1 ${errors.cardNumber ? 'is-invalid' : ''}`}
                 placeholder="XXXX-XXXX-XXXX-XXXX"
-                onChange={handleCardNumberChange}            
+                value={handleCardDisplay()}
+                onChange={handleCardNumberChange}        
+                onKeyDown={handleCardDelete}    
               />
+              {errors.cardNumber && <label className="invalid-feedback">This field is required</label>}
             </div>
             <div className="form-group mt-3">
               <label>Pin</label>
               <input
+                {...register("pin", {
+                  required: true, 
+                  minLength: 4,
+                  maxLength: 4
+                })}
                 type="password"
-                className="form-control mt-1"
+                maxLength="4"
+                className={`form-control mt-1 ${errors.pin ? 'is-invalid' : ''}`}
                 placeholder="Enter pin (4 digits)"
                 onChange={handlePinChange}
               />
+              {/* {(pin <= 999 || pin > 9999) && <label className="">The pin must be of 4-digits</label>} */}
+              {errors.pin && <label className="invalid-feedback">This field is required</label>}
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button onClick={handleSubmit} type="submit" className="btn btn-primary">
+              <button onClick={handleSubmit(onSubmit)} type="submit" className="btn btn-primary">
                 Submit
               </button>
             </div>
