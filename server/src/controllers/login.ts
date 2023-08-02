@@ -14,8 +14,7 @@ export const login = async (req: Request, res: Response) => {
     if (!card) {
       return res
         .status(400)
-        .json({ msg: "Card with this number does not exists" 
-      })
+        .json({ msg: "Card with this number does not exists"})
     }
     const user = await User.findOne({
       where: {

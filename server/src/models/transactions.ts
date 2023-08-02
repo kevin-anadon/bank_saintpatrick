@@ -11,7 +11,7 @@ interface TransactionAttributes {
 
 interface TransactionInstance extends Model<TransactionAttributes>, TransactionAttributes {}
 
-export const Transaction = sequelize.define<TransactionInstance>("card", 
+export const Transaction = sequelize.define<TransactionInstance>("transaction", 
   {
       id: {
         type: DataTypes.INTEGER,
@@ -34,5 +34,8 @@ export const Transaction = sequelize.define<TransactionInstance>("card",
         type: DataTypes.DATE,
         allowNull: false,
       }
+  },
+  {
+    timestamps: false,
   }
 )
