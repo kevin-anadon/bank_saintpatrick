@@ -4,7 +4,7 @@ import { sequelize } from "../config/index.js"
 interface CardAttributes {
   id: number
   user_id: number
-  cardNumber: number
+  cardNumber: string
   pin: string
   balance: number
 }
@@ -23,7 +23,7 @@ export const Card = sequelize.define<CardInstance>("card",
         allowNull: false,
       },
       cardNumber: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
       },
@@ -33,7 +33,7 @@ export const Card = sequelize.define<CardInstance>("card",
         unique: true,
       },
       balance: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.DECIMAL,
       },
   },
   { // Borrado logico

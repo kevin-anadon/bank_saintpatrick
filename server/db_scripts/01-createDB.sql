@@ -15,11 +15,21 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS cards (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
-    cardNumber BIGINT NOT NULL UNIQUE,
-    pin VARCHAR(100) NOT NULL UNIQUE,    
-    balance BIGINT DEFAULT 0,
+    cardNumber VARCHAR(100) NOT NULL UNIQUE,
+    pin VARCHAR(4) NOT NULL UNIQUE,    
+    balance DECIMAL(10, 2) DEFAULT 0,
     createdAt datetime NOT NULL,
 	updatedAt datetime DEFAULT NULL,
 	deletedAt datetime DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS transactions (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	sender_id INT NOT NULL,
+    recipient_id INT NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    transaction_date DATETIME NOT NULL,
+    FOREIGN KEY (sender_id) REFERENCES users(id),
+    FOREIGN KEY (recipient_id) REFERENCES users(id)
 );

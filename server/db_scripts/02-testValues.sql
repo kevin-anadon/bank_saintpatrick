@@ -9,13 +9,22 @@ insert into users (firstName, lastName, createdAt) values ('Valaria', 'Bliven', 
 insert into users (firstName, lastName, createdAt) values ('Beale', 'Scaddon', '2023-01-06 22:50:04');
 insert into users (firstName, lastName, createdAt) values ('Gerardo', 'Pawelke', '2023-02-09 12:55:39');
 
-insert into cards (user_id, cardNumber, pin, balance, createdAt) values (1, '3587178387560641', 6326, 6748, '2023-01-28 00:57:38');
-insert into cards (user_id, cardNumber, pin, balance, createdAt) values (2, '5602235522018814', 9473, 5560, '2022-08-31 03:30:48');
-insert into cards (user_id, cardNumber, pin, balance, createdAt) values (3, '5495516386820209', 1382, 8769, '2023-01-28 09:13:30');
-insert into cards (user_id, cardNumber, pin, balance, createdAt) values (4, '3551146539801074', 9116, 8452, '2022-11-17 09:41:36');
-insert into cards (user_id, cardNumber, pin, balance, createdAt) values (5, '3539272184885621', 4228, 7971, '2023-05-21 14:40:31');
-insert into cards (user_id, cardNumber, pin, balance, createdAt) values (6, '5602254053009027', 2393, 3713, '2022-10-21 01:26:34');
-insert into cards (user_id, cardNumber, pin, balance, createdAt) values (7, '676762740331015582', 3849, 4985, '2022-12-28 21:44:31');
-insert into cards (user_id, cardNumber, pin, balance, createdAt) values (8, '4405193410974741', 5889, 7708, '2023-01-25 12:00:21');
-insert into cards (user_id, cardNumber, pin, balance, createdAt) values (9, '5602226126124157', 3106, 3976, '2022-11-29 15:07:57');
-insert into cards (user_id, cardNumber, pin, balance, createdAt) values (10, '5602229885952826', 3151, 3328, '2022-10-06 17:06:59');
+insert into cards (user_id, cardNumber, pin, balance, createdAt) values (1, '560222260604123294', 8165, 15275.68, '2022-08-16 08:02:30');
+insert into cards (user_id, cardNumber, pin, balance, createdAt) values (2, '67630115870480624', 7369, 86376.9, '2023-04-20 01:54:21');
+insert into cards (user_id, cardNumber, pin, balance, createdAt) values (3, '3587835697820854', 2455, 93349.86, '2023-02-12 02:11:14');
+insert into cards (user_id, cardNumber, pin, balance, createdAt) values (4, '3565599497918997', 9266, 45286.25, '2022-11-07 17:40:36');
+insert into cards (user_id, cardNumber, pin, balance, createdAt) values (5, '4844993913059323', 1701, 86379.15, '2022-12-25 09:06:42');
+insert into cards (user_id, cardNumber, pin, balance, createdAt) values (6, '3550857680891349', 5180, 98926.53, '2023-01-20 06:58:50');
+insert into cards (user_id, cardNumber, pin, balance, createdAt) values (7, '6381860832336146', 1396, 50964.38, '2022-12-10 08:37:34');
+insert into cards (user_id, cardNumber, pin, balance, createdAt) values (8, '3561751773494359', 3980, 83809.06, '2023-01-21 05:05:44');
+insert into cards (user_id, cardNumber, pin, balance, createdAt) values (9, '3567064710924445', 6283, 19240.42, '2022-09-29 12:52:56');
+insert into cards (user_id, cardNumber, pin, balance, createdAt) values (10, '201885249346694', 3696, 45299.91, '2023-01-25 16:29:09');
+
+insert into transactions (sender_id, recipient_id, amount, transaction_date) values (1, 2, 3718.11, '2022-12-25 08:02:30');
+insert into transactions (sender_id, recipient_id, amount, transaction_date) values (2, 3, 5565.0, '2023-02-12 00:02:30');
+insert into transactions (sender_id, recipient_id, amount, transaction_date) values (3, 4, 3360.03, '2022-11-10 01:02:30');
+insert into transactions (sender_id, recipient_id, amount, transaction_date) values (4, 5, 3749.26, '2023-05-17 02:02:30');
+insert into transactions (sender_id, recipient_id, amount, transaction_date) values (5, 6, 3150.85, '2022-09-15 05:02:30');
+insert into transactions (sender_id, recipient_id, amount, transaction_date) values (6, 7, 4336.13, '2023-01-11 00:00:30');
+insert into transactions (sender_id, recipient_id, amount, transaction_date) values (7, 8, 8938.42, '2023-11-10 06:02:30');
+insert into transactions (sender_id, recipient_id, amount, transaction_date) values (8, 9, 3562.09, '2022-12-30 02:02:30');
