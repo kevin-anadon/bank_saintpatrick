@@ -9,8 +9,8 @@ insert into users (firstName, lastName, createdAt) values ('Valaria', 'Bliven', 
 insert into users (firstName, lastName, createdAt) values ('Beale', 'Scaddon', '2023-01-06 22:50:04');
 insert into users (firstName, lastName, createdAt) values ('Gerardo', 'Pawelke', '2023-02-09 12:55:39');
 
-insert into cards (user_id, cardNumber, pin, balance, createdAt) values (1, '560222260604123294', 8165, 15275.68, '2022-08-16 08:02:30');
-insert into cards (user_id, cardNumber, pin, balance, createdAt) values (2, '67630115870480624', 7369, 86376.9, '2023-04-20 01:54:21');
+insert into cards (user_id, cardNumber, pin, balance, createdAt) values (1, '5602222606041232', 8165, 15275.68, '2022-08-16 08:02:30');
+insert into cards (user_id, cardNumber, pin, balance, createdAt) values (2, '6763011587048061', 7369, 86376.9, '2023-04-20 01:54:21');
 insert into cards (user_id, cardNumber, pin, balance, createdAt) values (3, '3587835697820854', 2455, 93349.86, '2023-02-12 02:11:14');
 insert into cards (user_id, cardNumber, pin, balance, createdAt) values (4, '3565599497918997', 9266, 45286.25, '2022-11-07 17:40:36');
 insert into cards (user_id, cardNumber, pin, balance, createdAt) values (5, '4844993913059323', 1701, 86379.15, '2022-12-25 09:06:42');
@@ -18,7 +18,7 @@ insert into cards (user_id, cardNumber, pin, balance, createdAt) values (6, '355
 insert into cards (user_id, cardNumber, pin, balance, createdAt) values (7, '6381860832336146', 1396, 50964.38, '2022-12-10 08:37:34');
 insert into cards (user_id, cardNumber, pin, balance, createdAt) values (8, '3561751773494359', 3980, 83809.06, '2023-01-21 05:05:44');
 insert into cards (user_id, cardNumber, pin, balance, createdAt) values (9, '3567064710924445', 6283, 19240.42, '2022-09-29 12:52:56');
-insert into cards (user_id, cardNumber, pin, balance, createdAt) values (10, '201885249346694', 3696, 45299.91, '2023-01-25 16:29:09');
+insert into cards (user_id, cardNumber, pin, balance, createdAt) values (10, '2018852493466945', 3696, 45299.91, '2023-01-25 16:29:09');
 
 insert into transactions (sender_id, recipient_id, amount, transaction_date) values (1, 2, 3718.11, '2022-12-25 08:02:30');
 insert into transactions (sender_id, recipient_id, amount, transaction_date) values (2, 3, 5565.0, '2023-02-12 00:02:30');
