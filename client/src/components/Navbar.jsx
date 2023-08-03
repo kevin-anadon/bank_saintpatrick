@@ -1,7 +1,7 @@
   /* eslint-disable react/prop-types */
   import bankLogo from '../assets/resources/images/logo.png'
   import "bootstrap/dist/css/bootstrap.min.css"
-  import { Navbar } from 'react-bootstrap'
+  import { Nav, Navbar } from 'react-bootstrap'
   import Swal from "sweetalert2"
   import withReactContent from "sweetalert2-react-content"
 
@@ -17,6 +17,12 @@
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Sign out'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        sessionStorage.removeItem('user')
+        sessionStorage.removeItem('card')
+        window.location.href = '/'
+      }
     })
   }
 
@@ -27,7 +33,7 @@
     }
     return (
       <Navbar className="bg-body-tertiary p-2 d-flex justify-content-between">
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/home">
               <img
                 alt="Bank Logo"
                 src={bankLogo}
@@ -36,6 +42,10 @@
               />{' '}
               Saint Patrick Bank
             </Navbar.Brand>
+            <Nav className="me-auto">
+              <Nav.Link href='/home'>Home</Nav.Link>
+              <Nav.Link href='/transactions'>Transactions</Nav.Link>
+            </Nav>
             {btnSignOut}
         </Navbar>
     )
