@@ -85,6 +85,10 @@ npm install
 ```
 
 5. Set up your MySQL database and update the database configuration in the back-end.
+```
+cd server/db_scripts
+```
+You will find 2 scripts: 01-createDB, 02-testValues and the Entity Relational Diagram
 
 6. Run the front-end development server.
 
@@ -97,7 +101,7 @@ npm run dev
 
 ```
 cd server
-npm start
+npm run dev
 ```
 
 You should now be able to access the application locally at `http://localhost:3000`.
