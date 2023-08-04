@@ -108,7 +108,7 @@ You should now be able to access the application locally at `http://localhost:51
 The backend at `http://localhost:3001`
 
 ## Documentation
-Documentation for backend: [Doc](https://documenter.getpostman.com/view/16602212/2s9XxyQtPN)
+Documentation for backend: [doc](https://documenter.getpostman.com/view/16602212/2s9XxyQtPN)
 
 ## Deployment
 
