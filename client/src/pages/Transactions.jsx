@@ -103,45 +103,56 @@ export default function Transactions() {
     setAmount(event.target.value)
   }
 
-  const onSubmit = async () => {
-    try {
-      const response = await fetch('http://localhost:3001/api/transactions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          senderId: user.id,
-          senderCardNumber: card.cardNumber,
-          recipientCardNumber,
-          amount: parseFloat(amount)
-        })
-      })  
-
-      const data = await response.json()      
-      if (response.status === 200) {
-        MySwal.fire({
-          icon: 'success',
-          title: 'Transaction Successful',
-          text: `${data.msg}`,
-        })
-        setShowModal(false)
-        loadTransactions()
-      } else {
-        MySwal.fire({
-          icon: 'error',
-          title: 'Transaction Failed',
-          text: `${data.msg ?? data.errors[0].msg}!`,
-        })
+  const onSubmit = () => {
+     MySwal.fire({
+        title: 'Are you sure?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirm Transaction'
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch('http://localhost:3001/api/transactions', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              senderId: user.id,
+              senderCardNumber: card.cardNumber,
+              recipientCardNumber,
+              amount: parseFloat(amount)
+            })
+          })  
+    
+          const data = await response.json()      
+          if (response.status === 200) {
+            MySwal.fire({
+              icon: 'success',
+              title: 'Transaction Successful',
+              text: `${data.msg}`,
+            })
+            setShowModal(false)
+            loadTransactions()
+          } else {
+            MySwal.fire({
+              icon: 'error',
+              title: 'Transaction Failed',
+              text: `${data.msg ?? data.errors[0].msg}!`,
+            })
+          }
+        } catch (error) {
+          MySwal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: `Try again later!`
+          })
+          throw Error(error)
+        }
       }
-    } catch (error) {
-      MySwal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: `Try again later!`
-      })
-      throw Error(error)
-    }
+    })
   }
 
   if (isLoggedIn) {
