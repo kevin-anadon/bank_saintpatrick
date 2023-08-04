@@ -50,19 +50,35 @@ export const createTransaction = async (req: Request, res: Response) => {
       }
     })
 
-    const { user_id }: { user_id: number } = await Card.findOne({
-      attributes: ['user_id'],
+    if (amount > senderBalance) return res.status(400).json({ message: 'Insufficient balance for performing the transaction!' })
+
+    const recipientCard = await Card.findOne({
+      attributes: ['user_id', 'balance'],
       where: {
         cardNumber: recipientCardNumber
       }
     })
 
+    const { user_id: recipientId, balance: recipientBalance } = recipientCard
+
     const transaction = await Transaction.create({
       sender_id: senderId,
-      recipient_id: user_id,
+      recipient_id: recipientId,
       amount,
       transaction_date: transactionDate
     }, { transaction: transactionInstance })
+
+    // Making this trick to perform the decimal arithmetic
+    const recipientNewBalance = ((recipientBalance * 10) + (amount * 10)) / 10
+
+    const addAmount = await Card.update(
+      {
+        balance: recipientNewBalance
+      },
+      {
+        where: { cardNumber: recipientCardNumber }
+      }
+    )
 
     const removeAmount = await Card.update(
       {
@@ -77,7 +93,7 @@ export const createTransaction = async (req: Request, res: Response) => {
 
     return res
       .status(200)
-      .json({ senderId, senderBalance, recipientId: user_id, recipientCardNumber, amount, transactionDate, transaction,removeAmount})
+      .json({ senderId, senderBalance, recipientId, recipientCardNumber, amount, transactionDate, transaction, addAmount, removeAmount})
   } catch (error) {
     await transactionInstance.rollback()
     res.status(503).send(error);

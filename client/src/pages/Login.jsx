@@ -19,6 +19,14 @@ export default function Login() {
     if (user && user.firstName) {
       handleAuthStatusChange()
     }
+    // Apply the style to prevent scrolling on the entire page
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      // Reset the style when the component unmounts
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    };
   }, [])
 
   const handleCardDisplay = () => {

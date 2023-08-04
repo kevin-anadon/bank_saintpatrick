@@ -2,10 +2,6 @@
   background-color: white;
 }
 
-body {
-  overflow: hidden;
-}
-
 .Home-container {
   display: flex;
   justify-content: center;
