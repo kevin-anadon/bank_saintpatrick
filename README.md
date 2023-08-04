@@ -107,6 +107,9 @@ npm run dev
 You should now be able to access the application locally at `http://localhost:5173`.
 The backend at `http://localhost:3001`
 
+## Documentation
+Documentation for backend: `https://documenter.getpostman.com/view/16602212/2s9XxyQtPN`
+
 ## Deployment
 
 To deploy the front-end on Netlify and the back-end on Railway, follow the respective deployment instructions for each platform.
