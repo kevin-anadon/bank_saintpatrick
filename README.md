@@ -104,7 +104,8 @@ cd server
 npm run dev
 ```
 
-You should now be able to access the application locally at `http://localhost:3000`.
+You should now be able to access the application locally at `http://localhost:5173`.
+The backend at `http://localhost:3001`
 
 ## Deployment
 
