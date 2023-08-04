@@ -10,10 +10,15 @@ export default function Home() {
 
   const user = JSON.parse(sessionStorage.getItem('user'))
   const card  = JSON.parse(sessionStorage.getItem('card'))
+  const authToken  = JSON.parse(sessionStorage.getItem('authToken'))
 
   const getCardBalance = async () => {
     try {
-      const response = await (await fetch(`http://localhost:3001/api/cards/${card.cardNumber}`)).json()
+      const response = await (await fetch(`http://localhost:3001/api/cards/${card.cardNumber}`, {
+        headers:{
+          'auth-token': authToken,
+        }
+      })).json()
       setCardBalance(response.balance)
       if (response.balance !== card.balance) {
         card.balance = response.balance
@@ -41,6 +46,7 @@ export default function Home() {
     if (isTabClosing) {
       sessionStorage.removeItem('user')
       sessionStorage.removeItem('card')
+      sessionStorage.removeItem('authToken')
     }
 
     window.addEventListener('unload', handleWindowUnload)

@@ -21,6 +21,7 @@
       if (result.isConfirmed) {
         sessionStorage.removeItem('user')
         sessionStorage.removeItem('card')
+        sessionStorage.removeItem('authToken')
         window.location.href = '/'
       }
     })

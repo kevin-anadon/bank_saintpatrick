@@ -80,8 +80,10 @@ export default function Login() {
         const user = {id, firstName, lastName}
         const { cardNumber, balance } = data.card
         const card = {cardNumber, balance}
+        const authToken = data.token
         sessionStorage.setItem('user', JSON.stringify(user))
         sessionStorage.setItem('card', JSON.stringify(card))
+        sessionStorage.setItem('authToken', JSON.stringify(authToken))
         handleAuthStatusChange()
       } else {
         MySwal.fire({

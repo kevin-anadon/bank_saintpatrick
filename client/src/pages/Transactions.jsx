@@ -21,6 +21,7 @@ export default function Transactions() {
 
   const user = JSON.parse(sessionStorage.getItem('user'))
   const card  = JSON.parse(sessionStorage.getItem('card'))
+  const authToken  = JSON.parse(sessionStorage.getItem('authToken'))
 
   const handleModalClose = () => setShowModal(false)
 
@@ -28,7 +29,11 @@ export default function Transactions() {
 
   const loadTransactions = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/transactions/${user.id}?thisMonth=${true}`)
+      const response = await fetch(`http://localhost:3001/api/transactions/${user.id}?thisMonth=${true}`, {
+        headers: {
+          'auth-token': authToken
+        }
+      })
       const transactions = await response.json()
       setTransactions(transactions)
     } catch (error) {
@@ -117,7 +122,8 @@ export default function Transactions() {
           const response = await fetch('http://localhost:3001/api/transactions', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'auth-token': authToken
             },
             body: JSON.stringify({
               senderId: user.id,

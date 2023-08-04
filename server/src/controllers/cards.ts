@@ -3,13 +3,8 @@ import { Request , Response} from 'express';
 import { Card } from "../models/index.js"
 
 export const getBalance = async (req: Request, res: Response) => { 
-  const cardNumber = req.params.cardNumber
-  if (!cardNumber) {
-    return res
-      .status(400)
-      .json({ msg: "You must pass the card number"})
-  }
   try {
+    const cardNumber = req.params.cardNumber
     const cardBalance = await Card.findOne(
       { 
       attributes: ['balance'],

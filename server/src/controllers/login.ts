@@ -1,7 +1,8 @@
 import bcrypt from 'bcryptjs';
 import { Request , Response} from 'express';
 
-import { User, Card } from "../models/index.js"
+import { User, Card } from '../models/index.js'
+import { generateJWT } from '../utils/index.js'
 
 export const login = async (req: Request, res: Response) => { 
   const { cardNumber, pin }: { cardNumber: number, pin: string } = req.body;
@@ -39,10 +40,12 @@ export const login = async (req: Request, res: Response) => {
       })
     }
 
+    const token = await generateJWT(user.id)
+
     res.status(200).json({
       card,
       user,
-      validPassword
+      token,
     })
   } catch (error) {
     throw Error(error)
