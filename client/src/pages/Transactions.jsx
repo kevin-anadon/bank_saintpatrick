@@ -1,27 +1,36 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react"
+import { useForm } from "react-hook-form"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
+import {Button, Modal} from 'react-bootstrap';
 
 import Navbar from "../components/Navbar"
 import sendTransaction from "../assets/resources/images/sendTransaction.svg"
 import recieveTransaction from "../assets/resources/images/recieveTransaction.svg"
 
 export default function Transactions() {
+  const [showModal, setShowModal] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isTabClosing, setIsTabClosing] = useState(false);
   const [transactions, setTransactions] = useState([])
+  const [recipientCardNumber, setRecipientCardNumber] = useState('')
+  const [amount, setAmount] = useState(0)
+  const { register, handleSubmit, formState: { errors } } = useForm()
   const MySwal = withReactContent(Swal)
 
   const user = JSON.parse(sessionStorage.getItem('user'))
   const card  = JSON.parse(sessionStorage.getItem('card'))
 
+  const handleModalClose = () => setShowModal(false)
+
+  const handleModalShow = () => setShowModal(true)
+
   const loadTransactions = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/transactions/${user.id}`)
+      const response = await fetch(`http://localhost:3001/api/transactions/${user.id}?thisMonth=${true}`)
       const transactions = await response.json()
-      // TODO: Mostrar data
-      setTransactions(transactions.reverse())
+      setTransactions(transactions)
     } catch (error) {
       MySwal.fire({
         icon: 'error',
@@ -55,24 +64,160 @@ export default function Transactions() {
       window.removeEventListener('unload', handleWindowUnload)
     }
   }, [isTabClosing])
+
+
+  const formatDate = (notFormattedDate) => {
+    return (new Date(notFormattedDate).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    }))
+  }
+
+  const handleRecipientCardDisplay = () => {
+        const rawText = [...recipientCardNumber.split('-').join('')] // Remove old space     
+        if (rawText.length <= 16) {
+          const creditCard = [] // Create card as array
+          rawText.forEach((text, index) => {
+              if (index % 4 === 0 && index !== 0) creditCard.push('-') // Add space
+              creditCard.push(text)
+          })
+          return creditCard.join('')
+        }
+  }
+
+  const handleRecipientCardDelete = (event) => {
+    const key = event.key || event.charCode
+    if (key === 'Backspace' && event.target.value.trim(1).length === 1) setRecipientCardNumber('')
+  }
+
+  const handleRecipientCardNumberChange  = (event) => { 
+    const inputRecipientCardNumber = event.target.value
+    if (inputRecipientCardNumber.trim().length >= 1) setRecipientCardNumber(inputRecipientCardNumber.split('-').join(''))
+  }
+
+  const handleAmountChange  = (event) => { 
+    setAmount(event.target.value)
+  }
+
+  const onSubmit = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/transactions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          senderId: user.id,
+          senderCardNumber: card.cardNumber,
+          recipientCardNumber,
+          amount: parseFloat(amount)
+        })
+      })  
+
+      const data = await response.json()      
+      if (response.status === 200) {
+        MySwal.fire({
+          icon: 'success',
+          title: 'Transaction Successful',
+          text: `${data.msg}`,
+        })
+        setShowModal(false)
+        loadTransactions()
+      } else {
+        MySwal.fire({
+          icon: 'error',
+          title: 'Transaction Failed',
+          text: `${data.msg ?? data.errors[0].msg}!`,
+        })
+      }
+    } catch (error) {
+      MySwal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `Try again later!`
+      })
+      throw Error(error)
+    }
+  }
+
   if (isLoggedIn) {
     return (
       <>
       <Navbar isLoggedIn={true}/>
       <div className="Home-container">
-        <div className="mt-5 container d-flex flex-column align-items-center">
+        <div className="mt-4 container d-flex flex-column align-items-center">
           <h1>Transactions History</h1>
           <p className="text-muted">(Last Month)</p>
           <div className="mt-4">
-            {transactions.map(transaction => (
-              <div key={transaction.id} className="card mb-4 text-center">
-              <div className="card-header">Transaction {transaction.id}</div>
+            <div className="mb-2 d-flex justify-content-end">
+              <button className="btn btn-outline-primary" onClick={handleModalShow}>Make a Transaction</button>
+            </div>
+            <Modal show={showModal} onHide={handleModalClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>New Transaction</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="form-group mt-3">
+                        <label>Card Number</label>
+                        <input
+                          {...register("cardNumber", {
+                            required: true,
+                            maxLength: 19,
+                            minLength: 19
+                          })}
+                          maxLength="19"
+                          type="text"
+                          className={`form-control mt-1 ${errors.cardNumber ? 'is-invalid' : ''}`}
+                          placeholder="XXXX-XXXX-XXXX-XXXX"
+                          value={handleRecipientCardDisplay()}
+                          onChange={handleRecipientCardNumberChange}        
+                          onKeyDown={handleRecipientCardDelete}    
+                        />
+                        {errors.cardNumber && <label className="invalid-feedback">This field is required</label>}
+                    </div>
+                    <div className="form-group mt-3">
+                        <label>Amount</label>
+                        <input
+                          {...register("amount", {
+                            required: true,
+                            minLength: 0
+                          })}              
+                          min="0.00"          
+                          type="number"
+                          className={`form-control mt-1 ${errors.amount ? 'is-invalid' : ''}`}
+                          placeholder="0.00"
+                          step="0.01"
+                          onChange={handleAmountChange}      
+                          />
+                          {errors.amount && <label className="invalid-feedback">This field is required</label>}
+                    </div>
+                </form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="danger" onClick={handleModalClose}>
+                  Cancel
+                </Button>
+                <Button variant="primary" onClick={handleSubmit(onSubmit)}>
+                  Confirm Transaction
+                </Button>
+              </Modal.Footer>
+            </Modal>
+            {transactions.map(({id, sender, recipient, amount, transaction_date, isSent}) => (
+              <div key={id} className="card mb-4 text-center">
+              <div className="card-header">Transaction {id}</div>
               <div className="card-body">
                 <div className="d-flex align-items-center justify-content-center">
-                <img width="50" height="40" src={sendTransaction} alt="Transaction"/>
-                <h5 className="card-title">Send to {`${transaction.recipient.firstName} ${transaction.recipient.lastName}`}</h5>
+                <img width="50" height="40" src={isSent ? sendTransaction: recieveTransaction} alt="Transaction"/>
+                <h5 className="card-title">
+                  {isSent ? `Transferred to ${recipient.firstName + ' ' + recipient.lastName}` : `Received from ${sender.firstName + ' ' + sender.lastName}`}
+                </h5>
                 </div>
-                <p className="card-text mt-2">Amount: ${transaction.amount}, Date: {transaction.transaction_date}</p>
+                <p className="card-text mt-2">Amount: ${amount}, Date: {formatDate(transaction_date)}</p>
               </div>
             </div>
             ))}
