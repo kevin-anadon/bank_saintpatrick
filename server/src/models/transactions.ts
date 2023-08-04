@@ -9,7 +9,7 @@ interface TransactionAttributes {
   transaction_date: Date
 }
 
-interface TransactionInstance extends Model<TransactionAttributes>, TransactionAttributes {}
+export interface TransactionInstance extends Model<TransactionAttributes>, TransactionAttributes {}
 
 export const Transaction = sequelize.define<TransactionInstance>("transaction", 
   {
