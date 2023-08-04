@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react"
 
-import transactionSvg from "../assets/resources/images/transaction.svg"
 import Navbar from "../components/Navbar"
 
 export default function Home() {  
@@ -33,6 +32,10 @@ export default function Home() {
     }
   }, [isTabClosing])
 
+  const formatCardNumber = (cardNumber) => {
+    return cardNumber.toString().replace(/(\d{4})/g, '$1-').trim().slice(0, -1)
+  }
+
   if (isLoggedIn) {
     return (
       <>
@@ -46,20 +49,9 @@ export default function Home() {
           </div>
           <div className="mt-4 row justify-content-center">
             <div className="col-6">
-              <h4>Your card: {card.cardNumber}
+              <h4>Your card: {formatCardNumber(card.cardNumber)}
               </h4>
               <h4>Balance: {card.balance} $</h4>
-            </div>
-          </div>
-          <div className="mt-4 row justify-content-center">
-            <div className="col">
-            <button onClick={() => {
-              // TODO: Hacer la transaccion(debe pedir num tarjeta y monto que no supere mi balance [<=])
-              alert("Te redirijo a las transacciones o puedo usar form por arriba tmb")
-            }} type="button" className="btn btn-success p-0 rounded-circle">
-              <img width="100" src={transactionSvg} alt="Transaction" />
-            </button>
-            <p className="text-black"><strong>Transaction</strong></p>
             </div>
           </div>
         </div>
