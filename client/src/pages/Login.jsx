@@ -92,6 +92,11 @@ export default function Login() {
         })
       }
     } catch (error) {
+      MySwal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `Try again later!`
+      })
       throw Error(error)
     }
   }

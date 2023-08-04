@@ -42,10 +42,14 @@
               />{' '}
               Saint Patrick Bank
             </Navbar.Brand>
-            <Nav className="me-auto">
-              <Nav.Link href='/home'>Home</Nav.Link>
-              <Nav.Link href='/transactions'>Transactions</Nav.Link>
-            </Nav>
+            {(props && props.isLoggedIn) 
+              ? 
+             (<Nav className="me-auto">
+                <Nav.Link href='/home'>Home</Nav.Link>
+                <Nav.Link href='/transactions'>Transactions</Nav.Link>
+              </Nav>)
+              : null
+            }
             {btnSignOut}
         </Navbar>
     )

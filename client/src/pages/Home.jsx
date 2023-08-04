@@ -5,13 +5,31 @@ import Navbar from "../components/Navbar"
 
 export default function Home() {  
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [cardBalance, setCardBalance] = useState(0.00)
   const [isTabClosing, setIsTabClosing] = useState(false);
 
   const user = JSON.parse(sessionStorage.getItem('user'))
   const card  = JSON.parse(sessionStorage.getItem('card'))
 
+  const getCardBalance = async () => {
+    try {
+      const response = await (await fetch(`http://localhost:3001/api/cards/${card.cardNumber}`)).json()
+      setCardBalance(response.balance)
+      if (response.balance !== card.balance) {
+        card.balance = response.balance
+        sessionStorage.setItem('card', JSON.stringify(card))
+      }
+    }
+     catch (error) {
+      throw Error(error)
+    }
+  }
+
   useEffect(() => {
-    if (user && user.firstName) setIsLoggedIn(true)
+    if (user && user.firstName) {
+      getCardBalance()
+      setIsLoggedIn(true)
+    }
     else window.location.href = '/login'
   }, [])
   
@@ -51,7 +69,7 @@ export default function Home() {
             <div className="col-6">
               <h4>Your card: {formatCardNumber(card.cardNumber)}
               </h4>
-              <h4>Balance: {card.balance} $</h4>
+              <h4>Balance: {cardBalance ?? 0.00} $</h4>
             </div>
           </div>
         </div>
