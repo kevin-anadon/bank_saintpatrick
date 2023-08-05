@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS saintpatrick_bank;
+CREATE DATABASE IF NOT EXISTS `sql10637626`;
 
-USE saintpatrick_bank;
+USE `sql10637626`;
 
 CREATE TABLE IF NOT EXISTS users (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS cards (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     cardNumber VARCHAR(100) NOT NULL UNIQUE,
-    pin VARCHAR(4) NOT NULL UNIQUE,    
+    pin VARCHAR(100) NOT NULL UNIQUE,    
     balance DECIMAL(10, 2) DEFAULT 0,
     createdAt datetime NOT NULL,
 	updatedAt datetime DEFAULT NULL,
