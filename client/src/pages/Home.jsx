@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react"
+import { API_URL } from "../constants"
 
 import Navbar from "../components/Navbar"
 
@@ -11,10 +12,11 @@ export default function Home() {
   const user = JSON.parse(sessionStorage.getItem('user'))
   const card  = JSON.parse(sessionStorage.getItem('card'))
   const authToken  = JSON.parse(sessionStorage.getItem('authToken'))
+  
 
   const getCardBalance = async () => {
     try {
-      const response = await (await fetch(`http://localhost:3001/api/cards/${card.cardNumber}`, {
+      const response = await (await fetch(`${API_URL}/cards/${card.cardNumber}`, {
         headers:{
           'auth-token': authToken,
         }

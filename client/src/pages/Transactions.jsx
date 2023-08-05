@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
 import {Button, Modal} from 'react-bootstrap';
+import { API_URL } from "../constants"
 
 import Navbar from "../components/Navbar"
 import sendTransaction from "../assets/resources/images/sendTransaction.svg"
@@ -29,7 +30,7 @@ export default function Transactions() {
 
   const loadTransactions = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/transactions/${user.id}?thisMonth=${true}`, {
+      const response = await fetch(`${API_URL}/transactions/${user.id}?thisMonth=${true}`, {
         headers: {
           'auth-token': authToken
         }
@@ -119,7 +120,7 @@ export default function Transactions() {
     }).then(async(result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch('http://localhost:3001/api/transactions', {
+          const response = await fetch(`${API_URL}/transactions`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

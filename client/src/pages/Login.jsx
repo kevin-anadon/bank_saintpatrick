@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
+import { API_URL } from "../constants"
 
 import Navbar from "../components/Navbar"
 
@@ -62,7 +63,7 @@ export default function Login() {
 
   const onSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/auth', {
+      const response = await fetch(`${API_URL}/auth`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
