@@ -108,11 +108,20 @@ You should now be able to access the application locally at `http://localhost:51
 The backend at `http://localhost:3001`
 
 ## Documentation
+
 Documentation for backend: [doc](https://documenter.getpostman.com/view/16602212/2s9XxyQtPN)
 
 ## Deployment
 
-To deploy the front-end on Netlify and the back-end on Railway, follow the respective deployment instructions for each platform.
+To deploy the front-end on Netlify and the back-end on Render, Database(MySQL) on freesqldatabase.com, follow the respective deployment instructions for each platform.
+
+## Test it
+
+Note: There is a [text](https://github.com/kevin-anadon/bank_saintpatrick/blob/main/client/lists%20of%20cards(Fictional).txt) with a list of cards to use for testing, also you can check in the database scripts for more details
+
+**Link to the application: [app](saintpatrickbank.netlify.app), if you are interested in the backend [server](https://saint-patrick-bank-api.onrender.com)**
+
+## Thanks
 
 Feel free to contribute to the project or report any issues [here](https://github.com/kevin-anadon/bank_saintpatrick/issues).
 
