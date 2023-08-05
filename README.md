@@ -119,7 +119,7 @@ To deploy the front-end on Netlify and the back-end on Render, Database(MySQL) o
 
 Note: There is a [text](https://github.com/kevin-anadon/bank_saintpatrick/blob/main/client/lists%20of%20cards(Fictional).txt) with a list of cards to use for testing, also you can check in the database scripts for more details
 
-**Link to the application: [app](saintpatrickbank.netlify.app), if you are interested in the backend [server](https://saint-patrick-bank-api.onrender.com)**
+**Link to the application: [app](https://saintpatrickbank.netlify.app), if you are interested in the backend [server](https://saint-patrick-bank-api.onrender.com)**
 
 ## Thanks
 
