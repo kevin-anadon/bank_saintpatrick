@@ -4,7 +4,7 @@ import { sequelize } from "../config/index.js";
 interface UserAttributes {
   id: number
   firstName: string
-  lastName: string
+  lastName: string  
 }
 
 export interface UserInstance extends Model<UserAttributes>, UserAttributes {}

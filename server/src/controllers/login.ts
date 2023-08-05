@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import { Request , Response} from 'express';
 
 import { User, Card } from '../models/index.js'
-import { generateJWT } from '../utils/index.js'
+import { generateJWT, encrypt } from '../utils/index.js'
 
 export const login = async (req: Request, res: Response) => { 
   const { cardNumber, pin }: { cardNumber: number, pin: string } = req.body;
@@ -29,14 +29,13 @@ export const login = async (req: Request, res: Response) => {
         .json({ msg: "User not found with this card" 
       })
     }
+    
+    const validPin = bcrypt.compareSync(pin, card.pin)
 
-    // TODO: use bcrypt y validar pass
-    const validPassword = true
-
-    if (!validPassword) {
+    if (!validPin) {
       return res
         .status(400)
-        .json({ msg: "Invalid password" 
+        .json({ msg: "Invalid pin" 
       })
     }
 
