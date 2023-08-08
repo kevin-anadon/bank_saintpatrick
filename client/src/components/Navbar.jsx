@@ -27,11 +27,12 @@
     })
   }
 
-    if (props && props.isLoggedIn) {
+    if (sessionStorage.getItem('user')) {
       btnSignOut = (
         <button onClick={handleSignOut} type='button' className='btn btn-warning'>Sign Out</button>
       )
     }
+
     return (
       <Navbar className="bg-body-tertiary p-2 d-flex justify-content-between">
             <Navbar.Brand href="/home">
@@ -43,7 +44,7 @@
               />{' '}
               Saint Patrick Bank
             </Navbar.Brand>
-            {(props && props.isLoggedIn) 
+            {(sessionStorage.getItem('user')) 
               ? 
              (<Nav className="me-auto">
                 <Nav.Link href='/home'>Home</Nav.Link>

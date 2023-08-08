@@ -6,7 +6,6 @@ import withReactContent from "sweetalert2-react-content"
 import {Button, Modal} from 'react-bootstrap';
 import { API_URL } from "../constants"
 
-import Navbar from "../components/Navbar"
 import sendTransaction from "../assets/resources/images/sendTransaction.svg"
 import recieveTransaction from "../assets/resources/images/recieveTransaction.svg"
 
@@ -164,8 +163,6 @@ export default function Transactions() {
 
   if (isLoggedIn) {
     return (
-      <>
-      <Navbar isLoggedIn={true}/>
       <div className="Home-container">
         <div className="mt-4 container d-flex flex-column align-items-center">
           <h1>Transactions History</h1>
@@ -242,7 +239,6 @@ export default function Transactions() {
           </div>
         </div>
       </div>
-      </>
     )
   }
 }

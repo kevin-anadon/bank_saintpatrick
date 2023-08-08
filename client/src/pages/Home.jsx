@@ -2,8 +2,6 @@
 import { useState, useEffect } from "react"
 import { API_URL } from "../constants"
 
-import Navbar from "../components/Navbar"
-
 export default function Home() {  
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [cardBalance, setCardBalance] = useState(0.00)
@@ -64,8 +62,6 @@ export default function Home() {
 
   if (isLoggedIn) {
     return (
-      <>
-      <Navbar isLoggedIn={true}/>
       <div className="Home-container">
         <div className="mt-4 container text-center">
           <div className="row justify-content-center">
@@ -82,7 +78,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      </>
     )
   }
 }
