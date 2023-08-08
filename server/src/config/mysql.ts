@@ -1,7 +1,8 @@
 import { Sequelize } from "sequelize";
 
 const {
-  MYSQL_DATABASE,
+  MYSQL_DATABASE_PROD,
+  MYSQL_DATABASE_DEV,
   MYSQL_USER_PROD,
   MYSQL_USER_DEV,
   MYSQL_PASSWORD_PROD,
@@ -11,7 +12,7 @@ const {
   NODE_ENV,
 } = process.env
 
-const database = MYSQL_DATABASE
+let database = MYSQL_DATABASE_PROD
 let username = MYSQL_USER_PROD
 let password = MYSQL_PASSWORD_PROD
 let host = MYSQL_HOST_PROD
@@ -25,6 +26,7 @@ const NODE_ENV_TYPE = {
 }
 
 if (NODE_ENV === NODE_ENV_TYPE.DEVELOPMENT  || NODE_ENV === NODE_ENV_TYPE.TEST) {
+  database = MYSQL_DATABASE_DEV
   username = MYSQL_USER_DEV
   password = MYSQL_PASSWORD_DEV
   host = MYSQL_HOST_DEV
