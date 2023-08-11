@@ -4,9 +4,8 @@ import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
+import "./Login.css"
 import { API_URL } from "../constants"
-
-import Navbar from "../components/Navbar"
 
 export default function Login() {
   const [authStatus, setAuthStatus] = useState(false)
@@ -138,12 +137,12 @@ export default function Login() {
               {errors.pin && <label className="invalid-feedback">This field is required</label>}
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-submit">
                 Submit
               </button>
             </div>
             <p className="forgot-password text-right mt-2">
-              Forgot <a href="#">pin?</a>
+              Forgot <a className="forgot-pin" href="#">pin?</a>
             </p>
           </div>
         </form>

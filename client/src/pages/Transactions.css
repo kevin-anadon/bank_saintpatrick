@@ -1,0 +1,25 @@
+.Transaction-container {
+  display: flex;
+  justify-content: center;
+  @supports (height: 100svh) or (height: 100dvh) {
+    min-height: 30dvh !important;
+  }
+  /* Fallback for browsers that do not support svh or dvh */
+  min-height: 85vh !important;
+}
+
+footer a {
+  padding-bottom: 10px;
+}
+
+.btn-transaction {
+  background-color: #FFFF;
+  color: #005758;
+  border: solid 1px;
+  font-weight:500;
+}
+
+.btn-transaction:hover {
+  background-color: #005758;
+  color: #FFFF;
+}

@@ -1,0 +1,15 @@
+.btn-submit {
+  background-color: #005758;
+  color: #FFFF;
+  font-weight:500;
+}
+
+.btn-submit:hover {
+  background-color: #FFFF;
+  color: #005758;
+  border: solid 1px;
+}
+
+.forgot-pin {
+  color: #005758;  
+}

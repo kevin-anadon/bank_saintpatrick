@@ -4,8 +4,9 @@
   import { Nav, Navbar } from 'react-bootstrap'
   import Swal from "sweetalert2"
   import withReactContent from "sweetalert2-react-content"
+  import "./Navbar.css"
 
-  export default function NavbarBrand(props) {
+  export default function NavbarBrand() {
     const MySwal = withReactContent(Swal)
     let btnSignOut
 
@@ -14,9 +15,9 @@
         title: 'Are you sure?',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sign out'
+        confirmButtonColor: '#005758',
+        cancelButtonColor: '#F7C548',
+        confirmButtonText: 'Sign out',
     }).then((result) => {
       if (result.isConfirmed) {
         sessionStorage.removeItem('user')
@@ -29,7 +30,7 @@
 
     if (sessionStorage.getItem('user')) {
       btnSignOut = (
-        <button onClick={handleSignOut} type='button' className='btn btn-warning'>Sign Out</button>
+        <button onClick={handleSignOut} type='button' className='btn btn-signout'>Sign Out</button>
       )
     }
 
