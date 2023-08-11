@@ -99,7 +99,7 @@ export default function Login() {
   if (!authStatus) {
     return (
       <div className="Auth-form-container">
-        <form onSubmit={handleSubmit(onSubmit)} className="Auth-form">
+        <form onSubmit={handleSubmit(onSubmit)} className="Auth-form mx-4">
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Sign In</h3>
             <div className="form-group mt-3">

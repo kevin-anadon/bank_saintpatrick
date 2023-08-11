@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react"
 import { API_URL } from "../constants"
+import Cards from "react-credit-cards-2"
+import "react-credit-cards-2/dist/es/styles-compiled.css"
+import "./Home.css"
 
 export default function Home() {  
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -56,10 +59,6 @@ export default function Home() {
     }
   }, [isTabClosing])
 
-  const formatCardNumber = (cardNumber) => {
-    return cardNumber.toString().replace(/(\d{4})/g, '$1-').trim().slice(0, -1)
-  }
-
   if (isLoggedIn) {
     return (
       <div className="Home-container">
@@ -69,11 +68,32 @@ export default function Home() {
               <h1>Welcome {user.firstName} {user.lastName}</h1>
             </div>
           </div>
-          <div className="mt-4 row justify-content-center">
-            <div className="col-6">
-              <h4>Your card: {formatCardNumber(card.cardNumber)}
-              </h4>
-              <h4>Balance: {cardBalance ?? 0.00} $</h4>
+          <div className="row justify-content-center custom-margin-top">
+            <div className="col-8">
+              <Cards
+                number={card.cardNumber}
+                name={user.firstName + ' ' + user.lastName}
+                expiry={'XX/XX'}
+              />
+            </div>
+          </div>
+          <div className="row justify-content-center custom-margin-top">
+            <div className="col-lg-4 col-sm-8">
+              <div className="card">
+                <div className="card-header">
+                  Balance Available
+                </div>
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-4 text-start">
+                      <p className="text-muted">US DOLLARS</p>
+                    </div>
+                    <div className="col-8 text-end">
+                      <p className="text-dark">${cardBalance ?? 0.00}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
