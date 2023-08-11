@@ -5,7 +5,12 @@
 .Home-container {
   display: flex;
   justify-content: center;
-  min-height: 90vh;
+  @supports (height: 100svh) or (height: 100dvh) {
+    min-height: 85svh;
+  }
+
+  /* Fallback for browsers that do not support svh or dvh */
+  min-height: 85vh;
 }
 
 .Auth-form-container {
@@ -15,11 +20,11 @@
   width: 100vw;
   /* For modern browsers that support the dynamic viewport height (dvh) unit */
   @supports (height: 100svh) or (height: 100dvh) {
-    min-height: 88svh;
+    min-height: 85svh;
   }
 
   /* Fallback for browsers that do not support svh or dvh */
-  min-height: 88vh;
+  min-height: 85vh;
 }
 
 #root {

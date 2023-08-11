@@ -3,8 +3,9 @@ import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
-import {Button, Modal} from 'react-bootstrap';
+import {Button, Modal} from "react-bootstrap"
 import { API_URL } from "../constants"
+import "./Transactions.css"
 
 import sendTransaction from "../assets/resources/images/sendTransaction.svg"
 import recieveTransaction from "../assets/resources/images/recieveTransaction.svg"
@@ -163,13 +164,13 @@ export default function Transactions() {
 
   if (isLoggedIn) {
     return (
-      <div className="Home-container">
+      <div className="Transaction-container">
         <div className="mt-4 container d-flex flex-column align-items-center">
           <h1>Transactions History</h1>
           <p className="text-muted">(Last Month)</p>
           <div className="mt-4">
             <div className="mb-2 d-flex justify-content-end">
-              <button className="btn btn-outline-primary" onClick={handleModalShow}>Make a Transaction</button>
+              <button className="btn btn-transaction" onClick={handleModalShow}>Make a Transaction</button>
             </div>
             <Modal show={showModal} onHide={handleModalClose}>
               <Modal.Header closeButton>

@@ -1,0 +1,11 @@
+.btn-signout {
+  background-color: rgb(0, 87, 88);
+  color: #F7C548;
+  font-weight:500;
+}
+
+.btn-signout:hover {
+  background-color: #FFFF;
+  color: #005758;
+  border: solid 1px;
+}
