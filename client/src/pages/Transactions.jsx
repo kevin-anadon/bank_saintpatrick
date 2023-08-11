@@ -114,8 +114,8 @@ export default function Transactions() {
         title: 'Are you sure?',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#005758',
+        cancelButtonColor: '#F7C548',
         confirmButtonText: 'Confirm Transaction'
     }).then(async(result) => {
       if (result.isConfirmed) {
@@ -215,10 +215,10 @@ export default function Transactions() {
                 </form>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="danger" onClick={handleModalClose}>
+                <Button className="btn-modal-cancel" onClick={handleModalClose}>
                   Cancel
                 </Button>
-                <Button variant="primary" onClick={handleSubmit(onSubmit)}>
+                <Button className="btn-modal-confirm" onClick={handleSubmit(onSubmit)}>
                   Confirm Transaction
                 </Button>
               </Modal.Footer>
