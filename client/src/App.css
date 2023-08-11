@@ -13,6 +13,12 @@
   justify-content: center;
   align-items: center;
   width: 100vw;
+  /* For modern browsers that support the dynamic viewport height (dvh) unit */
+  @supports (height: 100svh) or (height: 100dvh) {
+    min-height: 90svh;
+  }
+
+  /* Fallback for browsers that do not support svh or dvh */
   min-height: 90vh;
 }
 

@@ -34,7 +34,7 @@
     }
 
     return (
-      <Navbar className="bg-body-tertiary p-2 d-flex justify-content-between">
+      <Navbar expand="sm" className="bg-body-tertiary p-2">
             <Navbar.Brand href="/home">
               <img
                 alt="Bank Logo"
@@ -46,13 +46,18 @@
             </Navbar.Brand>
             {(sessionStorage.getItem('user')) 
               ? 
-             (<Nav className="me-auto">
-                <Nav.Link href='/home'>Home</Nav.Link>
-                <Nav.Link href='/transactions'>Transactions</Nav.Link>
-              </Nav>)
+              (<>
+                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                    <Nav.Link href='/home'>Home</Nav.Link>
+                    <Nav.Link href='/transactions'>Transactions</Nav.Link>
+                  </Nav>
+                  {btnSignOut}
+                </Navbar.Collapse>
+              </>)
               : null
             }
-            {btnSignOut}
         </Navbar>
     )
   }
