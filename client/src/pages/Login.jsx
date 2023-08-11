@@ -10,7 +10,7 @@ import { API_URL } from "../constants"
 export default function Login() {
   const [authStatus, setAuthStatus] = useState(false)
   const [cardNumber, setCardNumber] = useState('')
-  const [pin, setPin] = useState(0)
+  const [pin, setPin] = useState('')
   const { register, handleSubmit, formState: { errors } } = useForm()
   const MySwal = withReactContent(Swal)
   
@@ -54,6 +54,21 @@ export default function Login() {
 
   const onSubmit = async () => {
     try {
+      if (!pin && pin.trim().length == 0) {
+        MySwal.fire({
+          icon: 'error',
+          title: 'Invalid Fields',
+          text: 'Pin is required!',
+        })
+        return
+      } else if (!cardNumber && cardNumber.trim().length == 0) {
+        MySwal.fire({
+          icon: 'error',
+          title: 'Invalid Fields',
+          text: 'Card Number is required!',
+        })
+        return
+      }
       const response = await fetch(`${API_URL}/auth`, {
         method: 'POST',
         headers: {
@@ -95,6 +110,10 @@ export default function Login() {
     }
   }
 
+  const handleFocus = (event) => {
+    console.log(event.target.value);
+  }
+
   if (!authStatus) {
     return (
       <div className="Auth-form-container">
@@ -123,18 +142,27 @@ export default function Login() {
               <label>Pin</label>
               <input
                 {...register("pin", {
-                  required: true, 
-                  minLength: 4,
-                  maxLength: 4
+                  required: {
+                    value: true,
+                    message: "This field is required"
+                  },
+                  minLength: {
+                    value: 4,
+                    message: "Pin must be 4 characters"
+                  },
+                  maxLength: {
+                    value: 4,
+                    message: "Pin must be 4 characters"
+                  },
                 })}
-                type="password"
                 maxLength="4"
+                type="password"
                 className={`form-control mt-1 ${errors.pin ? 'is-invalid' : ''}`}
                 placeholder="Enter pin (4 digits)"
                 onChange={handlePinChange}
+                onFocus={handleFocus}
               />
-              {/* {(pin <= 999 || pin > 9999) && <label className="">The pin must be of 4-digits</label>} */}
-              {errors.pin && <label className="invalid-feedback">This field is required</label>}
+              {errors.pin && <label className="invalid-feedback">{errors.pin.message}</label>}
             </div>
             <div className="d-grid gap-2 mt-3">
               <button type="submit" className="btn btn-submit">

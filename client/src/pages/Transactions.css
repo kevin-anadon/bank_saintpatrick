@@ -23,3 +23,24 @@ footer a {
   background-color: #005758;
   color: #FFFF;
 }
+
+.btn-modal-confirm {
+  background-color: #005758;
+  color: #FFFF;
+}
+
+.btn-modal-confirm:hover {
+  background-color: #014748;
+  color: #FFFF;
+}
+
+.btn-modal-cancel {
+  background-color: #F7C548;
+  color: #FFFF;
+  border: 0px;
+}
+
+.btn-modal-cancel:hover {
+  background-color: #DAB147;
+  color: #FFFF;
+}
