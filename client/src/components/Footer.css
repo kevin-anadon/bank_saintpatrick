@@ -8,9 +8,18 @@ footer a {
   margin-left: 5px;
 }
 
-footer p {
+footer a p {
+  display: none;
   color: black;
   margin-left: 5px;
+  padding: 5px;
+  white-space: nowrap;
+}
+
+@media only screen and (min-width: 601px) {
+  footer :hover p {
+    display: block;
+  }
 }
 
 footer img {
