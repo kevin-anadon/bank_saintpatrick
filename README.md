@@ -26,10 +26,6 @@ The main objective of Saint Patrick Bank is to enable users to transfer money be
 - ExpressJS (Web application framework for NodeJS)
 - MySQL (Relational database management system)
 
-## Deployment
-
-The front-end of the application will be hosted on Netlify, while the back-end and database will be deployed on Railway.
-
 ## Pages
 
 1. **Login**
