@@ -1,4 +1,5 @@
-import "dotenv/config.js"
+// Dev Env
+// import "dotenv/config.js"
 import express from "express"
 import cors from "cors"
 
@@ -15,13 +16,18 @@ app.use(express.json())
 // Routes
 app.use("/api", routes)
 
-// Listen
-const server = app.listen(PORT)
+try {
+  // Listen
+  app.listen(PORT)
+  
+  // Database connection
+  dbConnect()
+} catch (error) {
+  console.error('Error starting the server: ', error.message)
+  process.exit(1)
+}
 
-// Database connection
-dbConnect()
 
 export {
   app,
-  server
 }
