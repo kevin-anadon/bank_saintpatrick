@@ -24,7 +24,6 @@ try {
   dbConnect()
 } catch (error) {
   console.error('Error starting the server: ', error.message)
-  process.exit(1)
 }
 
 
