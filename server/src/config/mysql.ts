@@ -9,6 +9,8 @@ const {
   MYSQL_PASSWORD_DEV,
   MYSQL_HOST_PROD,
   MYSQL_HOST_DEV,
+  MYSQL_PORT_PROD,
+  MYSQL_PORT_DEV,
   NODE_ENV,
 } = process.env
 
@@ -16,6 +18,7 @@ let database = MYSQL_DATABASE_PROD
 let username = MYSQL_USER_PROD
 let password = MYSQL_PASSWORD_PROD
 let host = MYSQL_HOST_PROD
+let port = Number(MYSQL_PORT_PROD)
 
 // TODO: use type NODE_ENV_TYPE = "development" | "test" | "production"
 
@@ -30,6 +33,7 @@ if (NODE_ENV === NODE_ENV_TYPE.DEVELOPMENT  || NODE_ENV === NODE_ENV_TYPE.TEST) 
   username = MYSQL_USER_DEV
   password = MYSQL_PASSWORD_DEV
   host = MYSQL_HOST_DEV
+  port = Number(MYSQL_PORT_DEV)
 }
 
 const sequelize = new Sequelize(
@@ -38,6 +42,7 @@ const sequelize = new Sequelize(
   password, 
   {
     host,
+    port,
     dialect: "mysql",
     logging: false, // Prevents a huge amount of logs
   }
