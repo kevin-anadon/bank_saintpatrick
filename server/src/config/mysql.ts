@@ -47,15 +47,23 @@ const sequelize = new Sequelize(
     logging: false, // Prevents a huge amount of logs
   }
 )
+let dbConnect
 
-const dbConnect = async () => {
-  try {
-    await sequelize.authenticate()
-    console.log("MYSQL connection successful")
-    await sequelize.sync()
-  } catch (err) {
-    throw Error(err)
+try {
+  dbConnect = async () => {
+    try {
+      await sequelize.authenticate()
+      console.log("MYSQL connection successful")
+      await sequelize.sync()
+    } catch (err) {
+      throw Error(err)
+    }
   }
+  
+} catch (error) {
+  
+} finally {
+  
 }
 
 export { sequelize, dbConnect}
