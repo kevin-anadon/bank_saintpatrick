@@ -109,7 +109,7 @@ Documentation for backend: [doc](https://documenter.getpostman.com/view/16602212
 
 ## Deployment
 
-To deploy the front-end on Netlify and the back-end on Render, Database(MySQL) on freesqldatabase.com, follow the respective deployment instructions for each platform.
+To deploy the front-end on Netlify and the back-end on Render, Database(MySQL) on filess.io, follow the respective deployment instructions for each platform.
 
 ## Test it
 
