@@ -1,3 +1,15 @@
-.custom-margin-top {
-  margin-top: 14dvh !important;
+.Home-container {
+  display: flex;
+  justify-content: center;
+}
+
+.Home-container .row.custom-margin-top {
+  margin-top: 15vh;
+}
+
+/* Small Screen */
+@media only screen and (max-width: 600px) {
+  .Home-container .row.custom-margin-top {
+    margin-top: 5vh;
+  }
 }

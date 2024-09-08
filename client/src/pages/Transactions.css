@@ -1,11 +1,6 @@
 .Transaction-container {
   display: flex;
   justify-content: center;
-  @supports (height: 100svh) or (height: 100dvh) {
-    min-height: 30dvh !important;
-  }
-  /* Fallback for browsers that do not support svh or dvh */
-  min-height: 85vh !important;
 }
 
 footer a {

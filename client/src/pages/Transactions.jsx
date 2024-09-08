@@ -164,7 +164,7 @@ export default function Transactions() {
 
   if (isLoggedIn) {
     return (
-      <div className="Transaction-container">
+      <div className="Transaction-container flex-grow-1">
         <div className="mt-4 container d-flex flex-column align-items-center">
           <h1>Transactions History</h1>
           <p className="text-muted">(Last Month)</p>

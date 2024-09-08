@@ -119,7 +119,7 @@ export default function Login() {
 
   if (!authStatus) {
     return (
-      <div className="Auth-form-container">
+      <div className="Auth-form-container custom-h-containers">
         <form onSubmit={handleSubmit(onSubmit)} className="Auth-form mx-4">
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Sign In</h3>

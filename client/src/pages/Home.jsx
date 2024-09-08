@@ -69,7 +69,7 @@ export default function Home() {
             </div>
           </div>
           <div className="row justify-content-center custom-margin-top">
-            <div className="col-8">
+            <div className="col-sm-8 col-lg-4">
               <Cards
                 number={card.cardNumber}
                 name={user.firstName + ' ' + user.lastName}

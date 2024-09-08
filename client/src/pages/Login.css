@@ -1,3 +1,42 @@
+.Auth-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  @supports (height: 100svh) or (height: 100dvh) {
+    min-height: 80dvh;
+  }
+
+  /* Fallback for browsers that do not support svh or dvh */
+  min-height: 80vh;
+}
+
+.Auth-form {
+  width: 420px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.Auth-form-content {
+  padding-left: 12%;
+  padding-right: 12%;
+}
+
+.Auth-form-title {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 24px;
+  color: rgb(34, 34, 34);
+  font-weight: 800;
+}
+
+.link {
+  cursor: pointer;
+}
+
 .btn-submit {
   background-color: #005758;
   color: #FFFF;

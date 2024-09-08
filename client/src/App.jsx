@@ -7,16 +7,20 @@ import Navbar from './components/Navbar'
 
 function App() {
   return (
+    <div className='d-flex flex-column min-custom-h'>
     <BrowserRouter>
-      <Navbar/>
-      <Routes>
-        <Route path='/' element={<Navigate to='/login' replace/>}></Route>
-        <Route path='/login' element={<Login/>}></Route>
-        <Route path='/home' element={<Home/>}></Route>
-        <Route path='/transactions' element={<Transactions/>}></Route>
-      </Routes>
+      <div className='flex-grow-1'>
+        <Navbar/>
+        <Routes>
+          <Route path='/' element={<Navigate to='/login' replace/>}></Route>
+          <Route path='/login' element={<Login/>}></Route>
+          <Route path='/home' element={<Home/>}></Route>
+          <Route path='/transactions' element={<Transactions/>}></Route>
+        </Routes>
+      </div>
       <Footer/> 
     </BrowserRouter>
+    </div>
   )
 }
 
