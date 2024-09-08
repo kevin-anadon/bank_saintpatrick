@@ -11,7 +11,8 @@ export default function Login() {
   const [authStatus, setAuthStatus] = useState(false)
   const [cardNumber, setCardNumber] = useState('')
   const [pin, setPin] = useState('')
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const [isLoading, setLoading] = useState(false)
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm()
   const MySwal = withReactContent(Swal)
   
   useEffect(() => {
@@ -46,6 +47,7 @@ export default function Login() {
 
   const handlePinChange = (event) => { 
     setPin(event.target.value)
+    setValue("pin", event.target.value)
   }
 
   const handleAuthStatusChange = () => {
@@ -54,6 +56,8 @@ export default function Login() {
 
   const onSubmit = async () => {
     try {
+      // For spinner
+      setLoading(true)
       if (!pin && pin.trim().length == 0) {
         MySwal.fire({
           icon: 'error',
@@ -96,10 +100,13 @@ export default function Login() {
         MySwal.fire({
           icon: 'error',
           title: 'Oops...',
+          confirmButtonColor: '#005758',
           text: `${data.msg}!`,
           footer: '<a href="https://github.com/kevin-anadon/bank_saintpatrick">Why do I have this issue?</a>'
         })
       }
+      // For spinner
+      setLoading(false)
     } catch (error) {
       MySwal.fire({
           icon: 'error',
@@ -108,10 +115,6 @@ export default function Login() {
       })
       throw Error(error)
     }
-  }
-
-  const handleFocus = (event) => {
-    console.log(event.target.value);
   }
 
   if (!authStatus) {
@@ -156,17 +159,19 @@ export default function Login() {
                   },
                 })}
                 maxLength="4"
-                type="password"
+                type="password"                
                 className={`form-control mt-1 ${errors.pin ? 'is-invalid' : ''}`}
                 placeholder="Enter pin (4 digits)"
                 onChange={handlePinChange}
-                onFocus={handleFocus}
               />
               {errors.pin && <label className="invalid-feedback">{errors.pin.message}</label>}
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-submit">
-                Submit
+              <button type="submit" className="btn btn-submit p-2">
+                {isLoading ? <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span role="status"> Loading...</span></>
+                : '' }
+                {isLoading ? '' : 'Submit'}
               </button>
             </div>
             <p className="forgot-password text-right mt-2">
